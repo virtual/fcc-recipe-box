@@ -1,0 +1,8 @@
+$blue: #a6abe4;
+header { background:$blue; padding:10px;}
+ul.nav {
+  padding:0; margin:0;
+  li a { padding:0px 15px; border-right:1px solid #ccc; display:block; color:#fff; text-transform:uppercase; font-size:.9rem;
+  } 
+  li:last-child a { border-right:0;}
+}
