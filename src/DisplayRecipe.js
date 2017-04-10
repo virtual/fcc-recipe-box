@@ -10,6 +10,10 @@ class DisplayRecipe extends Component {
         
         return (
             <div className='card'>
+                <button type="button" className="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
                 <div className="recipe-form">
                     
                     {photo.length > 0 &&
