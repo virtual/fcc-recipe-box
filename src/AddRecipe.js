@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 export default class AddRecipe extends Component {
   render() {
     return (
+       <div className='card'>
       <div className="recipe-form recipe-add">
         <form className="form-horizontal" role="form">
           <fieldset>
@@ -35,6 +36,7 @@ export default class AddRecipe extends Component {
           </fieldset>
         </form>
       </div>
+      </div> 
     );
   }
 

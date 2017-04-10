@@ -46,7 +46,7 @@ const recipelist = [
             amount: '1 cup'
           }
         ],
-        directions: 'mix and bake'
+        directions: 'Lorem ipsum dolor sit amet, ut nec quando legendos accusata, modus sensibus usu ea, ad ipsum velit qualisque nec. Pertinax persecuti ut mei. Vis ei eius veri verterem, eu illum commodo copiosae mei. Et eum tollit quodsi, pro aperiri contentiones ex. '
     },
     {
         picture: 'http://satinflame.com/wp-content/uploads/2017/03/IMG_5708-1024x683.jpg',
@@ -62,7 +62,26 @@ const recipelist = [
           }
         ],
         directions: 'mix and bake'
-    } 
+    },
+    {
+        picture: '',
+        title: 'Jello',
+        ingredients: [
+          {
+            name: 'bananas',
+            amount: '2'
+          },
+          {
+            name: 'vanilla wafers',
+            amount: '1/2 cup'
+          },
+          {
+            name: 'banana pudding',
+            amount: '1 package'
+          }
+        ],
+        directions: 'Cook banana pudding. Mix in vanilla wafers and sliced bananas. Simmer for 20 minutes.'
+    },
 ];
 
 import React, {Component} from 'react';
@@ -78,8 +97,9 @@ export default class App extends Component {
         <Header/>
 
         <main>
-          <div class='container'>
+          <div className='container'>
             <div className="row">
+              <div className="card-columns">
               { recipelist.map((item, index) => {
                     return <DisplayRecipe 
                     key={index}
@@ -91,7 +111,7 @@ export default class App extends Component {
                 })}
 
               <AddRecipe/>
-              
+              </div>
             </div>
           </div>
         </main>
