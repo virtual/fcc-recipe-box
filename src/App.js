@@ -1,4 +1,4 @@
-const recipelist = [
+let recipelist = [
     {
         picture: 'http://satinflame.com/wp-content/uploads/2017/03/IMG_5708-1024x683.jpg',
         title: 'Fancy Cake',
@@ -84,6 +84,8 @@ const recipelist = [
     },
 ];
 
+
+
 import React, {Component} from 'react';
 import './App.css';
 import AddRecipe from './AddRecipe';
@@ -91,6 +93,18 @@ import Header from './Header';
 import DisplayRecipe from './DisplayRecipe';
 
 export default class App extends Component {
+
+ constructor(props) {
+    super(props);
+
+    this.state = {
+      recipelist
+      //recipelist: recipelist.splice(2,1)
+    }
+    
+ }
+ 
+   
   render() {
     return (
       <div>
@@ -103,6 +117,7 @@ export default class App extends Component {
               { recipelist.map((item, index) => {
                     return <DisplayRecipe 
                     key={index}
+                    elementNo={index}
                     title={item.title}
                     picture={item.picture}                        
                     directions={item.directions}

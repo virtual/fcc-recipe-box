@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Recipe extends Component {
+class Ingredient extends Component {
     render() {
         return (
             <li className='ingredient'>
@@ -10,4 +10,4 @@ class Recipe extends Component {
     }
 }
 
-export default Recipe;
+export default Ingredient;

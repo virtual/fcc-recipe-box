@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
 
 export default class AddRecipe extends Component {
+  constructor(props) {
+    super(props);
+    this.ClickRecipeAdd = this.ClickRecipeAdd.bind(this);
+     this.state = ({
+      inputTitle: '',
+      inputIngredients: []
+    });
+  }
   render() {
     return (
       <div>
@@ -26,6 +34,7 @@ export default class AddRecipe extends Component {
                   <label htmlFor="inputEmail3" className="col-sm-3 col-form-label">Name</label>
                   <div className="col-sm-9">
                     <input
+                      onChange={this.handleChange.bind(this)}
                       type="text"
                       className="form-control"
                       id="inputEmail3"
@@ -56,8 +65,8 @@ export default class AddRecipe extends Component {
 
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Add recipe</button>
+                <button type="submit" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" className="btn btn-primary" onClick={this.ClickRecipeAdd}>Add recipe</button>
               </div>
             </div>
           </div>
@@ -67,4 +76,15 @@ export default class AddRecipe extends Component {
     );
   }
 
+  handleChange(e) {
+      this.setState({
+        inputTitle: e.target.value
+      });
+    }
+
+  ClickRecipeAdd (event) {
+    event.preventDefault();
+   //  var input = React.findDOMNode(this.refs.inputPassword3)
+       console.log(this.state.inputTitle);
+  }
 }
