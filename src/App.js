@@ -89,8 +89,9 @@ let recipelist = [
 import React, {Component} from 'react';
 import './App.css';
 import AddRecipe from './AddRecipe';
-import Header from './Header';
 import DisplayRecipe from './DisplayRecipe';
+import Header from './Header';
+import Jumbotron from './Jumbotron';
 
 export default class App extends Component {
 
@@ -101,14 +102,16 @@ export default class App extends Component {
       recipelist
       //recipelist: recipelist.splice(2,1)
     }
-    
  }
+
  
    
   render() {
+    const background = 'http://satinflame.com/wp-content/uploads/2017/03/IMG_5708-1024x683.jpg';
     return (
       <div>
         <Header/>
+        <Jumbotron background={background}/>
 
         <main>
           <div className='container'>
