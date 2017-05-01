@@ -1,4 +1,4 @@
-let recipelist = [
+let genericRecipes = [
     {
         picture: 'http://satinflame.com/wp-content/uploads/2017/03/IMG_5708-1024x683.jpg',
         title: 'Fancy Cake',
@@ -99,14 +99,35 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      recipelist
+      
+      recipelist: []
       //recipelist: recipelist.splice(2,1)
     }
- }
+}
 
  
-   
+
+  componentDidMount() {
+     var localRecipes =  localStorage.getItem("_jayv30_recipes");
+  let recipelist2;
+
+    //console.log("recipes from localStorage: ", localRecipes);
+    if (!localRecipes) {
+      recipelist2 = JSON.stringify(genericRecipes);
+    } else {
+      recipelist2 = localRecipes;
+    }
+    this.setState({      
+      recipelist: JSON.parse(recipelist2)
+    });
+
+    console.log(this.state.recipelist);
+  }
+
   render() {
+    //var recipelist = JSON.parse(localStorage.getItem('recipelist')) || [];
+    var recipelist = this.state.recipelist;
+
     const background = 'http://satinflame.com/wp-content/uploads/2017/03/IMG_5708-1024x683.jpg';
     return (
       <div>
