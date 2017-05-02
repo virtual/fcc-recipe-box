@@ -97,15 +97,13 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    var localRecipes = localStorage.getItem("_jayv30_recipes");
-    let recipes;
+    var recipes = localStorage.getItem("_recipeslist01");
+    //let recipes;
 
-    //console.log("recipes from localStorage: ", localRecipes);
-    if (!localRecipes) {
+    console.log("recipes from localStorage: ", recipes);
+    if (!recipes) {
       recipes = JSON.stringify(genericRecipes);
-    } else {
-      recipes = localRecipes;
-    }
+    }  
     this.setState({
       recipelist: JSON.parse(recipes)
     });
@@ -135,7 +133,7 @@ export default class App extends Component {
                     ingredients={item.ingredients}/>
                 })}
 
-                <AddRecipe/>
+                <AddRecipe recipelist={this.state.recipelist} />
               </div>
             </div>
           </div>
@@ -144,4 +142,6 @@ export default class App extends Component {
       </div>
     );
   }
+
+   
 }

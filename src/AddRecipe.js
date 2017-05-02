@@ -31,23 +31,24 @@ export default class AddRecipe extends Component {
               <div className="modal-body">
 
                 <div className="form-group row">
-                  <label htmlFor="inputEmail3" className="col-sm-3 col-form-label">Name</label>
+                  <label htmlFor="recipename" className="col-sm-3 col-form-label">Name</label>
                   <div className="col-sm-9">
                     <input
-                      onChange={this.handleChange.bind(this)}
+                      onChange={this.getTitle.bind(this)}
                       type="text"
                       className="form-control"
-                      id="inputEmail3"
+                      id="recipename"
                       placeholder="Recipe Title"/>
                   </div>
                 </div>
                 <div className="form-group row">
-                  <label htmlFor="inputPassword3" className="col-sm-3 col-form-label">Ingredient</label>
+                  <label htmlFor="recipeing01" className="col-sm-3 col-form-label">Ingredient</label>
                   <div className="col-sm-9">
                     <input
+                     onChange={this.getIngredient.bind(this)}
                       type="text"
                       className="form-control"
-                      id="inputPassword3"
+                      id="recipeing01"
                       placeholder="Ingredient #1"/>
                   </div>
                 </div>
@@ -76,15 +77,39 @@ export default class AddRecipe extends Component {
     );
   }
 
-  handleChange(e) {
+  getTitle(e) {
       this.setState({
         inputTitle: e.target.value
       });
     }
+ getIngredient(e) {
+   var ing = [];
+   var obj = { "name": e.target.value, "amount": "1"};
+    
+   ing.push(obj);
+      this.setState({
+        inputIngredients: ing
+      });
+    }
+
 
   ClickRecipeAdd (event) {
     event.preventDefault();
    //  var input = React.findDOMNode(this.refs.inputPassword3)
-       console.log(this.state.inputTitle);
+   let recipelist = this.props.recipelist;
+  // console.log(this.state.ingredients);
+    let varRecipe = {
+      picture: '', title: this.state.inputTitle, ingredients: this.state.inputIngredients, directions: ''
+    };
+ //   console.log(recipelist);
+  //  console.log(varRecipe);
+    (recipelist).push(varRecipe);
+    
+    //this.props.onUpdate(recipelistUpdated)
+     
+
+    //console.log(recipelist);
+    localStorage.setItem("_recipeslist01", JSON.stringify(recipelist));
+    //localStorage.removeItem("_recipeslist01");
   }
 }
