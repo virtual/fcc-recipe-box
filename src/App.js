@@ -92,11 +92,12 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      recipelist: []
+      recipelist: [],
+      modalClass: 'show'
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     var recipes = localStorage.getItem("_recipeslist01");
     //let recipes;
 
@@ -130,7 +131,8 @@ export default class App extends Component {
                     title={item.title}
                     picture={item.picture}
                     directions={item.directions}
-                    ingredients={item.ingredients}/>
+                    ingredients={item.ingredients}
+                    modalClass={this.state.modalClass} />
                 })}
 
                 <AddRecipe recipelist={this.state.recipelist} />

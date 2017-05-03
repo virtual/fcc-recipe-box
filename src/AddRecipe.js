@@ -16,7 +16,7 @@ export default class AddRecipe extends Component {
       <div>
 
         <div
-          className="modal fade"
+          className={"modal fade " + this.props.modalClass}
           id="add-recipe-modal"
           tabIndex="-1"
           role="dialog"
@@ -86,7 +86,7 @@ export default class AddRecipe extends Component {
               </div>
               <div className="modal-footer">
                 <button type="submit" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" className="btn btn-primary" onClick={this.ClickRecipeAdd}>Add recipe</button>
+                <button type="submit" id="addRecipe" className="btn btn-primary" onClick={this.ClickRecipeAdd}>Add recipe</button>
               </div>
             </div>
           </div>
@@ -141,6 +141,11 @@ export default class AddRecipe extends Component {
 
     //console.log(recipelist);
     localStorage.setItem("_recipeslist01", JSON.stringify(recipelist));
+
+    //jQuery('#add-recipe-modal').modal('hide');
+
     //localStorage.removeItem("_recipeslist01");
   }
+
+  
 }
