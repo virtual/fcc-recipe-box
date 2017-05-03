@@ -6,7 +6,9 @@ export default class AddRecipe extends Component {
     this.ClickRecipeAdd = this.ClickRecipeAdd.bind(this);
      this.state = ({
       inputTitle: '',
-      inputIngredients: []
+      inputIngredients: [],
+      inputPicture: '',
+      inputDirections: ''
     });
   }
   render() {
@@ -52,17 +54,34 @@ export default class AddRecipe extends Component {
                       placeholder="Ingredient #1"/>
                   </div>
                 </div>
+                 
+                 
                 <div className="form-group row">
-                  <label className="col-sm-3">Checkbox</label>
+                  <label htmlFor="picture" className="col-sm-3 col-form-label">Picture URL</label>
                   <div className="col-sm-9">
-                    <div className="form-check">
-                      <label className="form-check-label">
-                        <input className="form-check-input" type="checkbox"/>
-                        Check me out
-                      </label>
-                    </div>
+                    <input
+                     onChange={this.getPicture.bind(this)}
+                      type="text"
+                      className="form-control"
+                      id="picture"
+                      placeholder=".jpg, .png"/>
                   </div>
                 </div>
+
+                
+                <div className="form-group row">
+                  <label htmlFor="directions" className="col-sm-3 col-form-label">Directions</label>
+                  <div className="col-sm-9">
+                    <input
+                     onChange={this.getDirections.bind(this)}
+                      type="text"
+                      className="form-control"
+                      id="directions"
+                      placeholder="How do you make it?"/>
+                  </div>
+                </div>
+                 
+                 
 
               </div>
               <div className="modal-footer">
@@ -82,6 +101,16 @@ export default class AddRecipe extends Component {
         inputTitle: e.target.value
       });
     }
+    getPicture(e) {
+      this.setState({
+        inputPicture: e.target.value
+      });
+    }
+    getDirections(e) {
+      this.setState({
+        inputDirections: e.target.value
+      });
+    }
  getIngredient(e) {
    var ing = [];
    var obj = { "name": e.target.value, "amount": "1"};
@@ -96,10 +125,12 @@ export default class AddRecipe extends Component {
   ClickRecipeAdd (event) {
     event.preventDefault();
    //  var input = React.findDOMNode(this.refs.inputPassword3)
+   // ice cream pic: http://i.imgur.com/gpILgEY.jpg
    let recipelist = this.props.recipelist;
   // console.log(this.state.ingredients);
+  // picture, directions
     let varRecipe = {
-      picture: '', title: this.state.inputTitle, ingredients: this.state.inputIngredients, directions: ''
+      picture:  this.state.inputPicture, title: this.state.inputTitle, ingredients: this.state.inputIngredients, directions:  this.state.inputDirections
     };
  //   console.log(recipelist);
   //  console.log(varRecipe);
