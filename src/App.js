@@ -1,6 +1,6 @@
 let genericRecipes = [
   {
-    picture: 'http://satinflame.com/wp-content/uploads/2017/03/IMG_5708-1024x683.jpg',
+    picture: 'https://satinflame.com/img/stock/stock003.jpg',
     title: 'Fancy Cake',
     ingredients: [
       {
@@ -30,7 +30,7 @@ let genericRecipes = [
     directions: 'Cook banana pudding. Mix in vanilla wafers and sliced bananas. Simmer for 20 min' +
         'utes.'
   }, {
-    picture: 'http://satinflame.com/wp-content/uploads/2017/03/IMG_5708-1024x683.jpg',
+    picture: 'https://satinflame.com/img/stock/stock003.jpg',
     title: 'Fancy Cake',
     ingredients: [
       {
@@ -46,7 +46,7 @@ let genericRecipes = [
         'rterem, eu illum commodo copiosae mei. Et eum tollit quodsi, pro aperiri content' +
         'iones ex. '
   }, {
-    picture: 'http://satinflame.com/wp-content/uploads/2017/03/IMG_5708-1024x683.jpg',
+    picture: 'https://satinflame.com/img/stock/stock003.jpg',
     title: 'Fancy Cake',
     ingredients: [
       {
@@ -114,7 +114,7 @@ export default class App extends Component {
     //var recipelist = JSON.parse(localStorage.getItem('recipelist')) || [];
     var recipelist = this.state.recipelist;
 
-    const background = 'http://satinflame.com/wp-content/uploads/2017/03/IMG_5708-1024x683.jpg';
+    const background = 'https://satinflame.com/img/stock/stock003.jpg';
     return (
       <div>
         <Header/>
