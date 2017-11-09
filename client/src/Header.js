@@ -9,11 +9,7 @@ export default class Header extends Component {
                     <div className='container'>
                         <ul className='nav'>
                             <li>
-                                
                                 <a id='add-recipe' href='#' data-toggle="modal" data-target="#exampleModal">Add Recipe</a>
-                            </li>
-                            <li>
-                                <a href='#'>Search Recipes</a>
                             </li>
                         </ul>
                     </div>

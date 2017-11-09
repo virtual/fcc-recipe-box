@@ -1,7 +1,36 @@
 import React, {Component} from 'react';
 import Ingredient from './Ingredient';
+var axios = require('axios');
 
 class DisplayRecipe extends Component {
+  constructor() {
+    super();
+    this.state = {
+      id: null
+    }
+    this.removeRecipe = this.removeRecipe.bind(this);
+  }
+
+  removeRecipe(event) {
+    if (window.confirm('Delete the recipe?' + this.state.id)) {
+      axios.post('/deleteRecipe', {id: this.state.id}).then((res) => {
+        if (res.status === 200) {   
+          console.log("successfully deleted!")
+          this.props.getRecipes();
+        }  else {
+          console.log('delete unsuccessful');
+        }
+      }); 
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.id === null) { 
+    this.setState({
+      id: this.props.id
+    })
+  }
+  }
     render() {
         var ingredients = this.props.ingredients;
 
@@ -10,7 +39,7 @@ class DisplayRecipe extends Component {
         
         return (
             <div className='card'>
-                <button id={"remove" + this.props.elementNo} type="button" className="close" aria-label="Close">
+                <button onClick={this.removeRecipe} value={this.props.id} type="button" className="close" aria-label="Delete">
                     <span aria-hidden="true">&times;</span>
                 </button>
 

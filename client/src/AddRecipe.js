@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
-export default class AddRecipe extends Component {
+import { withRouter } from 'react-router-dom';
+var axios = require("axios");
+
+class AddRecipe extends Component {
   constructor(props) {
     super(props);
     this.ClickRecipeAdd = this.ClickRecipeAdd.bind(this);
@@ -11,6 +14,56 @@ export default class AddRecipe extends Component {
       inputDirections: ''
     });
   }
+
+  getTitle(e) {
+    this.setState({
+      inputTitle: e.target.value
+    });
+  }
+  getPicture(e) {
+    this.setState({
+      inputPicture: e.target.value
+    });
+  }
+  getDirections(e) {
+    this.setState({
+      inputDirections: e.target.value
+    });
+  }
+getIngredient(e) {
+ var ing = [];
+ var obj = { "name": e.target.value, "amount": "1"};
+  
+ ing.push(obj);
+    this.setState({
+      inputIngredients: ing
+    });
+  }
+
+
+ClickRecipeAdd (event) {
+  event.preventDefault();
+ 
+// picture, directions
+  let varRecipe = {
+    picture:  this.state.inputPicture, 
+    title: this.state.inputTitle, 
+    ingredients: this.state.inputIngredients, 
+    directions:  this.state.inputDirections
+  };
+ 
+  // (recipelist).push(varRecipe); 
+   
+  axios.post('/saveRecipe', varRecipe).then((newRecipe) => {  
+    if (newRecipe.status === 200) {    
+      this.props.getRecipes();
+    }  else {
+      console.log('save unsuccessful');
+    }
+  }); 
+
+}
+
   render() {
     return (
       <div>
@@ -95,57 +148,6 @@ export default class AddRecipe extends Component {
       </div>
     );
   }
-
-  getTitle(e) {
-      this.setState({
-        inputTitle: e.target.value
-      });
-    }
-    getPicture(e) {
-      this.setState({
-        inputPicture: e.target.value
-      });
-    }
-    getDirections(e) {
-      this.setState({
-        inputDirections: e.target.value
-      });
-    }
- getIngredient(e) {
-   var ing = [];
-   var obj = { "name": e.target.value, "amount": "1"};
-    
-   ing.push(obj);
-      this.setState({
-        inputIngredients: ing
-      });
-    }
-
-
-  ClickRecipeAdd (event) {
-    event.preventDefault();
-   //  var input = React.findDOMNode(this.refs.inputPassword3)
-   // ice cream pic: http://i.imgur.com/gpILgEY.jpg
-   let recipelist = this.props.recipelist;
-  // console.log(this.state.ingredients);
-  // picture, directions
-    let varRecipe = {
-      picture:  this.state.inputPicture, title: this.state.inputTitle, ingredients: this.state.inputIngredients, directions:  this.state.inputDirections
-    };
- //   console.log(recipelist);
-  //  console.log(varRecipe);
-    (recipelist).push(varRecipe);
-    
-    //this.props.onUpdate(recipelistUpdated)
-     
-
-    //console.log(recipelist);
-    localStorage.setItem("_recipeslist01", JSON.stringify(recipelist));
-
-    //jQuery('#add-recipe-modal').modal('hide');
-
-    //localStorage.removeItem("_recipeslist01");
-  }
-
-  
+ 
 }
+export default withRouter(AddRecipe);
