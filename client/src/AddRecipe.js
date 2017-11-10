@@ -1,19 +1,21 @@
 import React, {Component} from 'react';
-
 import { withRouter } from 'react-router-dom';
+import AddIngredient from './AddIngredient';
 var axios = require("axios");
 
 class AddRecipe extends Component {
   constructor(props) {
     super(props);
     this.clickRecipeAdd = this.clickRecipeAdd.bind(this);
+    this.getIngredient = this.getIngredient.bind(this);
      this.state = ({
       inputTitle: '',
       inputIngredients: [],
       inputPicture: '',
-      inputDirections: '',
-      ingredientIterator: 2
+      inputDirections: ''
     });
+
+    this.ingKeeper= ["xxx","wwww"]
   }
 
   getTitle(e) {
@@ -32,17 +34,23 @@ class AddRecipe extends Component {
     });
   }
 getIngredient(e) {
- var ing = [];
- var obj = { "name": e.target.value};
- var inputs = document.getElementsByClassName( 'ingListItem' ),
- names  = [].map.call(inputs, function( input ) {
-     return input.value;
- }).join("||");
-  console.log(names);
- ing.push(obj);
-    this.setState({
-      inputIngredients: names
+  console.log(e.target.value)
+  var ing = [];
+  var obj = { "name": e.target.value};
+  var inputs = document.getElementsByClassName( 'ingListItem' ),
+    names  = [].map.call(inputs, function( input, i ) {
+      console.log(input.value);
+      ing.push(input.value);
+        return input.value;
     });
+  
+  this.ingKeeper = ing; 
+  console.log(this.ingKeeper)
+    this.setState({
+      // inputIngredients: names.split("||")
+      inputIngredients: this.ingKeeper
+    });
+    return this.ingKeeper
   }
 
 
@@ -51,7 +59,7 @@ clickRecipeAdd () {
   //event.preventDefault();
  
 // picture, directions
-  let ingArr = this.state.inputIngredients.split("||");
+  let ingArr = this.state.inputIngredients;
   let ingInput = [];
   console.log(ingArr);
   ingInput = ingArr.map((e, i) => {
@@ -103,20 +111,7 @@ clickRecipeAdd () {
                 <div className="form-group row">
                   <label htmlFor="recipeing01" className="col-sm-3 col-form-label">Ingredient</label>
                   <div className="col-sm-9">
-                  <input
-                  onChange={this.getIngredient.bind(this)}
-                  name="ingListItem[]"
-                   type="text"
-                   className="ingListItem form-control"
-                   id="recipeing01"
-                   placeholder="Ingredient #1"/>
-                   <input
-                     onChange={this.getIngredient.bind(this)}
-                     name="ingListItem[]"
-                      type="text"
-                      className="ingListItem form-control"
-                      id="recipeing02"
-                      placeholder="Ingredient #2"/>
+                  <AddIngredient ingKeeper={this.state.inputIngredients} getIngredient={this.getIngredient}/>
                   </div>
                 </div>
                  
