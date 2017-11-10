@@ -4,8 +4,7 @@ var RecipeSchema = new mongoose.Schema({
   title: String,
   directions: String, 
   ingredients: [{
-    name: String,
-    amount: String
+    name: String
   }]
 });
 module.exports = mongoose.model('Recipe', RecipeSchema); 

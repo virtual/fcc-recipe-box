@@ -53,7 +53,7 @@ class DisplayRecipe extends Component {
                           <h3>Ingredients</h3>
                           <ul>
                               {ingredients.map((content, index) => {
-                              return <Ingredient key={index} name={content.name} amount={content.amount}/>;
+                              return <Ingredient key={index} name={content.name} />;
                               })}
                           </ul>
                           <h3>Directions</h3>
