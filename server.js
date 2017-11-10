@@ -35,7 +35,6 @@ app.get("/", function(req, res, next) {
 });
  
 app.post('/recipes', function(req, res, next) {
-  console.log(req.body);
   if (!(req.body.query)) { // show all
     Recipe.find(function(err, recipes) {
       if(err){
@@ -44,15 +43,14 @@ app.post('/recipes', function(req, res, next) {
         res.json(recipes);
       }   
     });
-  } else { // search by title
-    // { "authors": { "$regex": "Alex", "$options": "i" } },
-    // Recipe.find({title: req.body.query},function(err, recipes) {
-    Recipe.find({title: {"$regex": req.body.query, "$options": "i"}},function(err, recipes) {
-    if(err){
-      next(err)
-    } else {
-      res.json(recipes);
-    }   
+  } else { // search by title 
+    Recipe.find({title: {"$regex": req.body.query, "$options": "i"}}, 
+    function(err, recipes) {
+      if(err){
+        next(err)
+      } else {
+        res.json(recipes);
+      }   
   });
 }
 });
@@ -83,9 +81,9 @@ app.post('/deleteRecipe', function(req, res, next) {
     if (err) { console.log(err) }
     let response = {
       message: "recipe successfully deleted" 
-  }; 
-  res.status(200).send(response);
- });
+    }; 
+    res.status(200).send(response);
+  });
 });
    
 

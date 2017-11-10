@@ -21,7 +21,7 @@ export default class Search extends Component {
   render() {
     return (
       <div className="searchbox">
-        <form><label htmlFor="searchquery">Search</label><input placeholder="Recipe name" onChange={this.handleChange} id="searchquery" name="searchquery" type="text"/></form>
+        <form><label htmlFor="searchquery">Search Recipes</label><input placeholder="Name" onChange={this.handleChange} id="searchquery" name="searchquery" type="text"/></form>
       </div>
     );
   }

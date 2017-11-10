@@ -49,13 +49,16 @@ class DisplayRecipe extends Component {
                     }
                     <div className="card-block">
                         <h2 className="card-title">{this.props.title}</h2>
-                    <h3>Ingredients:</h3>
-                    <ul>
-                        {ingredients.map((content, index) => {
-                        return <Ingredient key={index} name={content.name} amount={content.amount}/>;
-                        })}
-                    </ul>
-                    <p className="card-text">{directions}</p>
+                        <div className="card-content">
+                          <h3>Ingredients</h3>
+                          <ul>
+                              {ingredients.map((content, index) => {
+                              return <Ingredient key={index} name={content.name} amount={content.amount}/>;
+                              })}
+                          </ul>
+                          <h3>Directions</h3>
+                          <p className="card-text">{directions}</p>
+                          </div>
                     </div>
                 </div>
             </div>

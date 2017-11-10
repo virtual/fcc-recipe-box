@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 import './Header.css';
 
 export default class Header extends Component {
@@ -8,8 +9,8 @@ export default class Header extends Component {
                 <header>
                     <div className='container'>
                         <ul className='nav'>
-                            <li>
-                                <a id='add-recipe' href='#' data-toggle="modal" data-target="#exampleModal">Add Recipe</a>
+                            <li className="title">
+                                <Link to="/">Recipe Collector</Link>
                             </li>
                         </ul>
                     </div>

@@ -16,9 +16,12 @@ export default class App extends Component {
 
     this.state = {
       recipelist: null,
-      modalClass: 'show'
+      modalClass: 'hide'
     }
     this.getRecipes = this.getRecipes.bind(this);
+    this.saveRecipe = this.saveRecipe.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.handleAddClick = this.handleAddClick.bind(this);
   }
 
   getRecipes(searchquery){
@@ -26,10 +29,10 @@ export default class App extends Component {
     return new Promise((resolve, reject)=> {
       axios.post('/recipes', {query: searchquery}).then((res)=> {
         if (res !== undefined) { 
-          resolve(res.data);
           this.setState({ 
             recipelist: res.data
           });
+          resolve(res.data);
         }  else {
           reject("undefined");
         }
@@ -39,14 +42,47 @@ export default class App extends Component {
     });
   };
 
+  handleAddClick() {
+    console.log('ya')
+    this.setState ({
+      modalClass: 'show'
+    });
+    console.log('up')
+  }
+
+  handleCloseClick() {
+    this.setState ({
+      modalClass: 'hide'
+    });
+  }
+
+  saveRecipe(varRecipe) {
+    if (varRecipe.title) {
+      axios.post('/saveRecipe', varRecipe).then((newRecipe) => {  
+        if (newRecipe.status === 200) {   
+          console.log('gonna get recipes from addrecipe') 
+        }  else {
+          console.log('save unsuccessful');
+        }
+      }); 
+      this.getRecipes();
+      this.setState({
+        modalClass: 'hide'
+      });
+    }
+  }
+
   componentDidMount() {
-    this.getRecipes();
+    if (this.state.recipelist === null) {
+      this.getRecipes();
+      
+    }
   }
 
   render() {
     //var recipelist = JSON.parse(localStorage.getItem('recipelist')) || [];
     var recipelist = this.state.recipelist;
-
+ 
     const background = 'https://satinflame.com/img/stock/stock003.jpg';
     if (recipelist) {
       return (
@@ -54,7 +90,7 @@ export default class App extends Component {
           <Router>
             <div>
               <Header/>
-              <Jumbotron background={background}/>
+              <Jumbotron handleAddClick={this.handleAddClick} background={background}/>
               <Search getRecipes={this.getRecipes}/>
               <main>
                 <div className='container'>
@@ -73,7 +109,7 @@ export default class App extends Component {
                           modalClass={this.state.modalClass} />
                       })}
 
-                      <AddRecipe recipelist={this.state.recipelist} getRecipes={this.getRecipes} />
+                      <AddRecipe handleCloseClick={this.handleCloseClick} saveRecipe={this.saveRecipe} modalClass={this.state.modalClass} recipelist={this.state.recipelist} getRecipes={this.getRecipes} />
                     </div>
                   </div>
                 </div>
