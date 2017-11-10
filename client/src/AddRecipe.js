@@ -6,12 +6,12 @@ var axios = require("axios");
 class AddRecipe extends Component {
   constructor(props) {
     super(props);
-    this.ClickRecipeAdd = this.ClickRecipeAdd.bind(this);
+    this.clickRecipeAdd = this.clickRecipeAdd.bind(this);
      this.state = ({
       inputTitle: '',
       inputIngredients: [],
       inputPicture: '',
-      inputDirections: ''
+      inputDirections: '' 
     });
   }
 
@@ -41,8 +41,9 @@ getIngredient(e) {
   }
 
 
-ClickRecipeAdd (event) {
-  event.preventDefault();
+clickRecipeAdd () {
+  console.log(this.state);
+  //event.preventDefault();
  
 // picture, directions
   let varRecipe = {
@@ -53,37 +54,31 @@ ClickRecipeAdd (event) {
   };
  
   // (recipelist).push(varRecipe); 
+   console.log(this.props)
+  this.props.saveRecipe(varRecipe);
    
-  axios.post('/saveRecipe', varRecipe).then((newRecipe) => {  
-    if (newRecipe.status === 200) {    
-      this.props.getRecipes();
-    }  else {
-      console.log('save unsuccessful');
-    }
-  }); 
-
 }
-
-  render() {
+ 
+  render() { 
     return (
       <div>
 
         <div
-          className={"modal fade " + this.props.modalClass}
+          className={this.props.modalClass}
           id="add-recipe-modal"
           tabIndex="-1"
           role="dialog"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Add new recipe</h5>
+          <div className="box-dialog" role="document">
+            <div className="box-content">
+              <div className="box-header">
+                <h5 className="box-title" id="exampleModalLabel">Add new recipe</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div className="modal-body">
+              <div className="box-body">
 
                 <div className="form-group row">
                   <label htmlFor="recipename" className="col-sm-3 col-form-label">Name</label>
@@ -137,9 +132,9 @@ ClickRecipeAdd (event) {
                  
 
               </div>
-              <div className="modal-footer">
-                <button type="submit" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" id="addRecipe" className="btn btn-primary" onClick={this.ClickRecipeAdd}>Add recipe</button>
+              <div className="box-footer">
+                <button type="submit" onClick={this.props.handleCloseClick} className="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" id="addRecipe" className="btn btn-primary" onClick={this.clickRecipeAdd}>Add recipe</button>
               </div>
             </div>
           </div>

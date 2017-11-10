@@ -24,7 +24,7 @@ class Jumbotron extends Component {
                         <p className="lead">Recipes for every occasion—big and small.</p>
                         <p>Browse recipes or add your own.</p>
                         <p className="lead">
-                            <a id='jumbo-add-recipe' data-toggle="modal" data-target="#exampleModal" className="btn btn-primary btn-lg" href="#" role="button">Add Recipe</a>
+                            <a id='jumbo-add-recipe' onClick={this.props.handleAddClick} data-toggle="modal" data-target="#exampleModal" className="btn btn-primary btn-lg" href="#" role="button">Add Recipe</a>
                         </p>
                     </div>
                 </JumboDiv>

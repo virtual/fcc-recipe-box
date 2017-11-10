@@ -1,8 +1,14 @@
-$blue: #a6abe4;
-header { background:$blue; padding:8px;}
+ 
+header { background: #4ECDC4;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #556270, #4ECDC4);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #556270, #4ECDC4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   padding:8px;}
 ul.nav {
   padding:0; margin:0;
   li a { padding:0px 16px; border-right:1px solid #ccc; display:block; color:#fff; text-transform:uppercase; font-size:.9rem;
   } 
   li:last-child a { border-right:0;}
 }
+
+li.title { font-family:'Dancing Script', cursive; }
+ul.nav li.title a { text-transform: none;font-size: 1.2rem; }
