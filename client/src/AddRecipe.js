@@ -11,7 +11,8 @@ class AddRecipe extends Component {
       inputTitle: '',
       inputIngredients: [],
       inputPicture: '',
-      inputDirections: '' 
+      inputDirections: '',
+      ingredientIterator: 2
     });
   }
 
@@ -32,11 +33,15 @@ class AddRecipe extends Component {
   }
 getIngredient(e) {
  var ing = [];
- var obj = { "name": e.target.value, "amount": "1"};
-  
+ var obj = { "name": e.target.value};
+ var inputs = document.getElementsByClassName( 'ingListItem' ),
+ names  = [].map.call(inputs, function( input ) {
+     return input.value;
+ }).join("||");
+  console.log(names);
  ing.push(obj);
     this.setState({
-      inputIngredients: ing
+      inputIngredients: names
     });
   }
 
@@ -46,17 +51,21 @@ clickRecipeAdd () {
   //event.preventDefault();
  
 // picture, directions
+  let ingArr = this.state.inputIngredients.split("||");
+  let ingInput = [];
+  console.log(ingArr);
+  ingInput = ingArr.map((e, i) => {
+    return {name: e};
+  });
   let varRecipe = {
     picture:  this.state.inputPicture, 
     title: this.state.inputTitle, 
-    ingredients: this.state.inputIngredients, 
+    ingredients: ingInput, 
     directions:  this.state.inputDirections
   };
  
-  // (recipelist).push(varRecipe); 
-   console.log(this.props)
+  console.log(this.props)
   this.props.saveRecipe(varRecipe);
-   
 }
  
   render() { 
@@ -94,12 +103,20 @@ clickRecipeAdd () {
                 <div className="form-group row">
                   <label htmlFor="recipeing01" className="col-sm-3 col-form-label">Ingredient</label>
                   <div className="col-sm-9">
-                    <input
+                  <input
+                  onChange={this.getIngredient.bind(this)}
+                  name="ingListItem[]"
+                   type="text"
+                   className="ingListItem form-control"
+                   id="recipeing01"
+                   placeholder="Ingredient #1"/>
+                   <input
                      onChange={this.getIngredient.bind(this)}
+                     name="ingListItem[]"
                       type="text"
-                      className="form-control"
-                      id="recipeing01"
-                      placeholder="Ingredient #1"/>
+                      className="ingListItem form-control"
+                      id="recipeing02"
+                      placeholder="Ingredient #2"/>
                   </div>
                 </div>
                  

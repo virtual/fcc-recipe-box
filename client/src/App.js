@@ -57,6 +57,8 @@ export default class App extends Component {
   }
 
   saveRecipe(varRecipe) {
+    console.log("gonna save!")
+    console.log(varRecipe);
     if (varRecipe.title) {
       axios.post('/saveRecipe', varRecipe).then((newRecipe) => {  
         if (newRecipe.status === 200) {   

@@ -4,7 +4,7 @@ class Ingredient extends Component {
     render() {
         return (
             <li className='ingredient'>
-                {this.props.name}, {this.props.amount}
+                {this.props.name}
             </li>
         );
     }
