@@ -34,20 +34,16 @@ class AddRecipe extends Component {
     });
   }
 getIngredient(e) {
-  console.log(e.target.value)
   var ing = [];
   var obj = { "name": e.target.value};
   var inputs = document.getElementsByClassName( 'ingListItem' ),
     names  = [].map.call(inputs, function( input, i ) {
-      console.log(input.value);
       ing.push(input.value);
         return input.value;
     });
   
   this.ingKeeper = ing; 
-  console.log(this.ingKeeper)
     this.setState({
-      // inputIngredients: names.split("||")
       inputIngredients: this.ingKeeper
     });
     return this.ingKeeper
@@ -55,13 +51,9 @@ getIngredient(e) {
 
 
 clickRecipeAdd () {
-  console.log(this.state);
-  //event.preventDefault();
- 
 // picture, directions
   let ingArr = this.state.inputIngredients;
   let ingInput = [];
-  console.log(ingArr);
   ingInput = ingArr.map((e, i) => {
     return {name: e};
   });
@@ -72,7 +64,6 @@ clickRecipeAdd () {
     directions:  this.state.inputDirections
   };
  
-  console.log(this.props)
   this.props.saveRecipe(varRecipe);
 }
  
@@ -111,7 +102,7 @@ clickRecipeAdd () {
                 <div className="form-group row">
                   <label htmlFor="recipeing01" className="col-sm-3 col-form-label">Ingredient</label>
                   <div className="col-sm-9">
-                  <AddIngredient ingKeeper={this.state.inputIngredients} getIngredient={this.getIngredient}/>
+                  <AddIngredient inputIngredients={this.state.inputIngredients} getIngredient={this.getIngredient}/>
                   </div>
                 </div>
                  

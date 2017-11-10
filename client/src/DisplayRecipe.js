@@ -12,7 +12,7 @@ class DisplayRecipe extends Component {
   }
 
   removeRecipe(event) {
-    if (window.confirm('Delete the recipe?' + this.state.id)) {
+    if (window.confirm('Delete the recipe?')) {
       axios.post('/deleteRecipe', {id: this.state.id}).then((res) => {
         if (res.status === 200) {   
           console.log("successfully deleted!")
@@ -36,13 +36,18 @@ class DisplayRecipe extends Component {
 
         let photo = this.props.picture;
         let directions = this.props.directions;
-        
+        let ignoreIds = 'a065a04cd4f815dca0f22476d225a051f9bd06c4302fe4019c25a062649475ca61ad5fb1d075a05081ed06c4302fe4019ad5a051ccbd06c4302fe4019bf';
+        let deleteButton = '';
+        if (ignoreIds.indexOf(this.props.id) === -1 ) {
+          deleteButton = <button title="Delete recipe" onClick={this.removeRecipe} value={this.props.id} type="button" className="close" aria-label="Delete">
+            <span aria-hidden="true">&times;</span>
+        </button>;
+        }
+
         return (
             <div className='card'>
-                <button onClick={this.removeRecipe} value={this.props.id} type="button" className="close" aria-label="Delete">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-
+                
+              {deleteButton}
                 <div className="recipe-form">
                     {photo.length > 0 &&
                         <img className='card-img-top img-fluid' src={this.props.picture} alt={this.props.title}/>

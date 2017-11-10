@@ -1,12 +1,12 @@
-.recipe-form2 {
-  margin: 0 auto;
-  border: 1px solid #ccc;
-  background: #fff;
-  padding: 24px; }
-  .recipe-form2 legend {
-    text-align: left;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 16px; }
+* {
+  -webkit-transition: color 2s ease-out;
+  -moz-transition: color 2s ease-out;
+  -o-transition: color 2s ease-out;
+  transition: color 2s ease-out;
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out; }
 
 img {
   width: 100%;
@@ -58,14 +58,14 @@ button {
   cursor: pointer; }
 
 .card-block {
-  background: #5a3639;
+  background: #49535b;
   color: #fff; }
 
 .card-block h2, .card-block h3 {
   font-size: 1rem; }
 
 h2.card-title {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   text-align: center;
   line-height: 1.5;
   /* text-transform: uppercase; */
@@ -86,3 +86,16 @@ h2.card-title {
 
 .card-content {
   padding: 16px 20px; }
+
+footer {
+  background: #333;
+  padding: 16px 10px 8px 10px;
+  margin: 0;
+  text-align: center;
+  color: #eee;
+  font-size: .9rem; }
+  footer a {
+    color: #53c4bc;
+    font-family: 'Dancing Script', cursive; }
+    footer a:hover {
+      color: #5ed5cb; }

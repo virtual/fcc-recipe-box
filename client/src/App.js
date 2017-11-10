@@ -5,6 +5,7 @@ import DisplayRecipe from './DisplayRecipe';
 import Header from './Header';
 import Jumbotron from './Jumbotron';
 import Search from './Search';
+import Footer from './Footer'
 // import {Route, Router, Link} from 'react-router-dom';
 import { BrowserRouter as Router} from 'react-router-dom';
 var axios = require('axios');
@@ -43,11 +44,9 @@ export default class App extends Component {
   };
 
   handleAddClick() {
-    console.log('ya')
     this.setState ({
       modalClass: 'show'
     });
-    console.log('up')
   }
 
   handleCloseClick() {
@@ -57,12 +56,9 @@ export default class App extends Component {
   }
 
   saveRecipe(varRecipe) {
-    console.log("gonna save!")
-    console.log(varRecipe);
     if (varRecipe.title) {
       axios.post('/saveRecipe', varRecipe).then((newRecipe) => {  
         if (newRecipe.status === 200) {   
-          console.log('gonna get recipes from addrecipe') 
         }  else {
           console.log('save unsuccessful');
         }
@@ -82,11 +78,10 @@ export default class App extends Component {
   }
 
   render() {
-    //var recipelist = JSON.parse(localStorage.getItem('recipelist')) || [];
-    var recipelist = this.state.recipelist;
+
  
     const background = 'https://satinflame.com/img/stock/stock003.jpg';
-    if (recipelist) {
+    if (this.state.recipelist) {
       return (
         <div>
           <Router>
@@ -98,7 +93,7 @@ export default class App extends Component {
                 <div className='container'>
                   <div className="row">
                     <div className="card-columns">
-                      {recipelist.map((item, index) => { 
+                      {this.state.recipelist.map((item, index) => { 
                         return <DisplayRecipe
                         getRecipes={this.getRecipes}
                           key={index} 
@@ -116,6 +111,7 @@ export default class App extends Component {
                   </div>
                 </div>
               </main>
+              <Footer/>
             </div>
           </Router>
         </div>

@@ -7,39 +7,33 @@ export default class AddIngredient extends Component {
       
       this.ingredientIterator= 1;
       this.state = {
-        ingredientInput: []
+        ingredientInput: [] //html
       }
-      
+    this.tempArr = [];
   }
 
   componentDidMount() {
-    if (this.state.ingredientInput.length === 0) {
-      let tempArr = [];
+    if (this.state.ingredientInput.length === 0) { 
      this.addInput();
     }
   }
  
   addInput() {
-    let tempArr = [];
-    if (this.state.ingredientInput !== null) {
-      tempArr.push(this.state.ingredientInput);
-    }
-    tempArr.push(<input
+    this.tempArr.push(<input
       key={"recipeing" + this.ingredientIterator}
       onChange={this.props.getIngredient}
       name="ingListItem[]"
       type="text"
-      value={this.props.ingKeeper[this.ingredientIterator - 1]}
+      value={this.props.inputIngredients[this.ingredientIterator - 1]}
       className="ingListItem form-control"
       id={"recipeing" + this.ingredientIterator}
       placeholder={"Ingredient #" + this.ingredientIterator}/>);
-    
+   
     this.setState({
-      ingredientInput: tempArr
+      ingredientInput: this.tempArr
     })
 
     this.ingredientIterator = this.ingredientIterator + 1;
-    
   }
   render() {
     return (
