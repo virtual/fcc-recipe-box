@@ -41,7 +41,6 @@ export default class App extends Component {
   };
 
   handleAddClick() {
-    console.log("meww")
     this.setState ({
       modalClass: 'show'
     });

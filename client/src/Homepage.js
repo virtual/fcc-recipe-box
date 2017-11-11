@@ -6,7 +6,6 @@ import Search from './Search';
 export default class Homepage extends Component {
   render() {
     const background = 'https://satinflame.com/img/stock/stock003.jpg';
-    console.log(this.props);
     return (
       <div>
           <Jumbotron handleAddClick={this.props.handleAddClick} background={background}/>
