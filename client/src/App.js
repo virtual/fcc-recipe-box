@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
-import AddRecipe from './AddRecipe';
-import DisplayRecipe from './DisplayRecipe';
+
 import Header from './Header';
-import Jumbotron from './Jumbotron';
-import Search from './Search';
 import Footer from './Footer'
-// import {Route, Router, Link} from 'react-router-dom';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+import Homepage from './Homepage';
 var axios = require('axios');
 
 export default class App extends Component {
@@ -44,6 +41,7 @@ export default class App extends Component {
   };
 
   handleAddClick() {
+    console.log("meww")
     this.setState ({
       modalClass: 'show'
     });
@@ -80,37 +78,15 @@ export default class App extends Component {
   render() {
 
  
-    const background = 'https://satinflame.com/img/stock/stock003.jpg';
     if (this.state.recipelist) {
       return (
         <div>
           <Router>
             <div>
               <Header/>
-              <Jumbotron handleAddClick={this.handleAddClick} background={background}/>
-              <Search getRecipes={this.getRecipes}/>
-              <main>
-                <div className='container'>
-                  <div className="row">
-                    <div className="card-columns">
-                      {this.state.recipelist.map((item, index) => { 
-                        return <DisplayRecipe
-                        getRecipes={this.getRecipes}
-                          key={index} 
-                          id={item._id}
-                          elementNo={index}
-                          title={item.title}
-                          picture={item.picture}
-                          directions={item.directions}
-                          ingredients={item.ingredients}
-                          modalClass={this.state.modalClass} />
-                      })}
-
-                      <AddRecipe handleCloseClick={this.handleCloseClick} saveRecipe={this.saveRecipe} modalClass={this.state.modalClass} recipelist={this.state.recipelist} getRecipes={this.getRecipes} />
-                    </div>
-                  </div>
-                </div>
-              </main>
+              <Route exact path="/" render={()=> <Homepage handleAddClick={this.handleAddClick} handleCloseClick={this.handleCloseClick} saveRecipe={this.saveRecipe} modalClass={this.state.modalClass} recipelist={this.state.recipelist} getRecipes={this.getRecipes}  /> }/>
+     
+            
               <Footer/>
             </div>
           </Router>
