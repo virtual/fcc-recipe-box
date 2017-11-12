@@ -39,7 +39,7 @@ export default class AddIngredient extends Component {
     return (
       <div>
         {this.state.ingredientInput}
-        <button className="btn btn-success" onClick={this.addInput}>+</button>
+        <button title="Add ingredient" className="btn btn-success" onClick={this.addInput}>+</button>
        </div>
     );
   }

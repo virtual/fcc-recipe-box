@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import AddIngredient from './AddIngredient';
-var axios = require("axios");
 
 class AddRecipe extends Component {
   constructor(props) {
@@ -35,9 +34,8 @@ class AddRecipe extends Component {
   }
 getIngredient(e) {
   var ing = [];
-  var obj = { "name": e.target.value};
-  var inputs = document.getElementsByClassName( 'ingListItem' ),
-    names  = [].map.call(inputs, function( input, i ) {
+  var inputs = document.getElementsByClassName( 'ingListItem' );
+  [].map.call(inputs, function( input, i ) {
       ing.push(input.value);
         return input.value;
     });
@@ -93,9 +91,9 @@ clickRecipeAdd () {
               <div className="box-body">
 
                 <div className="form-group row">
-                  <label htmlFor="recipename" className="col-sm-3 col-form-label">Title</label>
+                  <label htmlFor="recipename" className="col-sm-3 col-form-label">Title&nbsp;*</label>
                   <div className="col-sm-9">
-                    <input
+                    <input required 
                       onChange={this.getTitle.bind(this)}
                       type="text"
                       className="form-control"
@@ -125,10 +123,11 @@ clickRecipeAdd () {
 
                 
                 <div className="form-group row">
-                  <label htmlFor="directions" className="col-sm-3 col-form-label">Directions</label>
+                  <label htmlFor="directions" className="col-sm-3 col-form-label">Directions&nbsp;*</label>
                   <div className="col-sm-9">
                     <input
                      onChange={this.getDirections.bind(this)}
+                     required 
                       type="text"
                       className="form-control"
                       id="directions"
