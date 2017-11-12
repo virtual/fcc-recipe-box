@@ -5,6 +5,7 @@ let mongoose = require('mongoose');
 let uriUtil = require('mongodb-uri');
 let Recipe = require('./models/Recipe.js');
 require('dotenv').config();
+var xssFilters = require('xss-filters');
 
 let mongodbUri = "mongodb://"+process.env.SERVER_MLAB_USER+":"+process.env.SERVER_MLAB_PASSWORD+"@ds151955.mlab.com:51955/fcc-recipe";
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
@@ -57,17 +58,16 @@ app.post('/recipes', function(req, res, next) {
 
 // saves recipe on update
 app.post('/saveRecipe', function(req, res, next) { 
-  console.log('addin')
-  console.log(req.body);
 
     // Add new recipe to db for slug/recipe 
     let recipe = new Recipe();   
-    recipe.picture = req.body.picture;  
-    recipe.title = req.body.title;
-    recipe.directions = req.body.directions; 
-    // recipe.ingredients = req.body.ingredients;
-    recipe.ingredients = req.body.ingredients.filter(function(n){ console.log(n); return n.name !== '' }); 
-    
+    recipe.picture = (req.body.picture !== '') ? xssFilters.inUnQuotedAttr(req.body.picture) : '';  
+    recipe.title = xssFilters.inUnQuotedAttr(req.body.title);
+    recipe.directions = xssFilters.inUnQuotedAttr(req.body.directions);
+    recipe.ingredients = req.body.ingredients.filter(function(n){  return (n.name) !== '' });
+    recipe.ingredients  = recipe.ingredients.map((e, i)=>{  
+      return {name: xssFilters.inUnQuotedAttr(e.name) }
+    });
 
     recipe.save(
       function(err, newrecipe){
