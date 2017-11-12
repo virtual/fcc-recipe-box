@@ -44,6 +44,17 @@ class DisplayRecipe extends Component {
         </button>;
         }
 
+        let ingredientHTML = '', ingredientHeader = '', ingredientsUL = '';
+        ingredientsUL= <ul>
+        {ingredients.map((content, index) => {
+        return <Ingredient key={index} name={content.name} />;
+        })} </ul>;
+
+        if (ingredients.length > 0) {
+          ingredientHeader =  <h3>Ingredients</h3>;
+          ingredientHTML = ingredientsUL;
+        }
+
         return (
             <div className='card'>
                 
@@ -55,12 +66,8 @@ class DisplayRecipe extends Component {
                     <div className="card-block">
                         <h2 className="card-title">{this.props.title}</h2>
                         <div className="card-content">
-                          <h3>Ingredients</h3>
-                          <ul>
-                              {ingredients.map((content, index) => {
-                              return <Ingredient key={index} name={content.name} />;
-                              })}
-                          </ul>
+                          {ingredientHeader}
+                          {ingredientHTML}
                           <h3>Directions</h3>
                           <p className="card-text">{directions}</p>
                           </div>

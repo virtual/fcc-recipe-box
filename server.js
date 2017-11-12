@@ -57,13 +57,17 @@ app.post('/recipes', function(req, res, next) {
 
 // saves recipe on update
 app.post('/saveRecipe', function(req, res, next) { 
+  console.log('addin')
+  console.log(req.body);
 
     // Add new recipe to db for slug/recipe 
     let recipe = new Recipe();   
     recipe.picture = req.body.picture;  
     recipe.title = req.body.title;
     recipe.directions = req.body.directions; 
-    recipe.ingredients = req.body.ingredients;
+    // recipe.ingredients = req.body.ingredients;
+    recipe.ingredients = req.body.ingredients.filter(function(n){ console.log(n); return n.name !== '' }); 
+    
 
     recipe.save(
       function(err, newrecipe){

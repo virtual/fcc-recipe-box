@@ -27,7 +27,7 @@ export default class Homepage extends Component {
                           modalClass={this.modalClass} />
                       })}
 
-                      <AddRecipe handleCloseClick={this.props.handleCloseClick} saveRecipe={this.props.saveRecipe} modalClass={this.props.modalClass} recipelist={this.props.recipelist} getRecipes={this.props.getRecipes} />
+                      <AddRecipe message={this.props.message} handleCloseClick={this.props.handleCloseClick} saveRecipe={this.props.saveRecipe} modalClass={this.props.modalClass} recipelist={this.props.recipelist} getRecipes={this.props.getRecipes} />
                     </div>
                   </div>
                 </div>

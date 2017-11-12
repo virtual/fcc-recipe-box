@@ -14,7 +14,8 @@ export default class App extends Component {
 
     this.state = {
       recipelist: null,
-      modalClass: 'hide'
+      modalClass: 'hide',
+      message: ''
     }
     this.getRecipes = this.getRecipes.bind(this);
     this.saveRecipe = this.saveRecipe.bind(this);
@@ -53,7 +54,7 @@ export default class App extends Component {
   }
 
   saveRecipe(varRecipe) {
-    if (varRecipe.title) {
+    if (varRecipe.title && varRecipe.directions) {
       axios.post('/saveRecipe', varRecipe).then((newRecipe) => {  
         if (newRecipe.status === 200) {   
         }  else {
@@ -62,7 +63,12 @@ export default class App extends Component {
       }); 
       this.getRecipes();
       this.setState({
-        modalClass: 'hide'
+        modalClass: 'hide',
+        message : ''
+      });
+    } else {
+      this.setState({
+        message: 'Title and directions are required'
       });
     }
   }
@@ -83,7 +89,7 @@ export default class App extends Component {
           <Router>
             <div>
               <Header/>
-              <Route exact path="/" render={()=> <Homepage handleAddClick={this.handleAddClick} handleCloseClick={this.handleCloseClick} saveRecipe={this.saveRecipe} modalClass={this.state.modalClass} recipelist={this.state.recipelist} getRecipes={this.getRecipes}  /> }/>
+              <Route exact path="/" render={()=> <Homepage message={this.state.message} handleAddClick={this.handleAddClick} handleCloseClick={this.handleCloseClick} saveRecipe={this.saveRecipe} modalClass={this.state.modalClass} recipelist={this.state.recipelist} getRecipes={this.getRecipes}  /> }/>
      
             
               <Footer/>

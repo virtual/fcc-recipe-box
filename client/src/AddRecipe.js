@@ -15,7 +15,7 @@ class AddRecipe extends Component {
       inputDirections: ''
     });
 
-    this.ingKeeper= ["xxx","wwww"]
+    this.ingKeeper=[] 
   }
 
   getTitle(e) {
@@ -64,10 +64,14 @@ clickRecipeAdd () {
     directions:  this.state.inputDirections
   };
  
-  this.props.saveRecipe(varRecipe);
+  this.props.saveRecipe(varRecipe); 
 }
  
   render() { 
+    let messageHtml = '';
+    if (this.props.message !== '') {
+      messageHtml = <div className="warning-message">{this.props.message}</div>
+    }
     return (
       <div>
 
@@ -89,7 +93,7 @@ clickRecipeAdd () {
               <div className="box-body">
 
                 <div className="form-group row">
-                  <label htmlFor="recipename" className="col-sm-3 col-form-label">Name</label>
+                  <label htmlFor="recipename" className="col-sm-3 col-form-label">Title</label>
                   <div className="col-sm-9">
                     <input
                       onChange={this.getTitle.bind(this)}
@@ -136,6 +140,7 @@ clickRecipeAdd () {
 
               </div>
               <div className="box-footer">
+                {messageHtml}
                 <button type="submit" onClick={this.props.handleCloseClick} className="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" id="addRecipe" className="btn btn-primary" onClick={this.clickRecipeAdd}>Add recipe</button>
               </div>
