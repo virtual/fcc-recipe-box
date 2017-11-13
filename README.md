@@ -1,6 +1,8 @@
 # fcc-recipe-box
 Recipe Box for freeCodeCamp
 
+[View application](fcc-recipe.herokuapp.com)
+
 ## Development Information
 
 ### Prior to running
