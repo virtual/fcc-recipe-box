@@ -61,12 +61,12 @@ app.post('/saveRecipe', function(req, res, next) {
 
     // Add new recipe to db for slug/recipe 
     let recipe = new Recipe();   
-    recipe.picture = (req.body.picture !== '') ? xssFilters.inUnQuotedAttr(req.body.picture) : '';  
-    recipe.title = xssFilters.inUnQuotedAttr(req.body.title);
-    recipe.directions = xssFilters.inUnQuotedAttr(req.body.directions);
+    recipe.picture = (req.body.picture !== '') ? xssFilters.inHTMLData(req.body.picture) : '';  
+    recipe.title = xssFilters.inHTMLData(req.body.title);
+    recipe.directions = xssFilters.inHTMLData(req.body.directions);
     recipe.ingredients = req.body.ingredients.filter(function(n){  return (n.name) !== '' });
     recipe.ingredients  = recipe.ingredients.map((e, i)=>{  
-      return {name: xssFilters.inUnQuotedAttr(e.name) }
+      return {name: xssFilters.inHTMLData(e.name) }
     });
 
     recipe.save(

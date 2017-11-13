@@ -15,7 +15,6 @@ class DisplayRecipe extends Component {
     if (window.confirm('Delete the recipe?')) {
       axios.post('/deleteRecipe', {id: this.state.id}).then((res) => {
         if (res.status === 200) {   
-          console.log("successfully deleted!")
           this.props.getRecipes();
         }  else {
           console.log('delete unsuccessful');

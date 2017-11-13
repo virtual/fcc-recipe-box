@@ -9,10 +9,12 @@
   -o-transition: background-color 2s ease-out;
   transition: background-color 2s ease-out;
 } 
-img { width:100%; height:auto;max-width:auto;} 
+img { height:auto;max-width:100%;} 
 button.close { position: absolute; background:#fff; padding:8px;left:auto;right:0; display: none;}
 .card:hover button.close { display: block;}
-
+.jumbotron {
+  border-radius: 0;
+}
 .container h1 { font-family:'Dancing Script', cursive;}
 div#add-recipe-modal {
   clear: both; 

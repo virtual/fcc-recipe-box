@@ -9,9 +9,8 @@
   transition: background-color 2s ease-out; }
 
 img {
-  width: 100%;
   height: auto;
-  max-width: auto; }
+  max-width: 100%; }
 
 button.close {
   position: absolute;
@@ -23,6 +22,9 @@ button.close {
 
 .card:hover button.close {
   display: block; }
+
+.jumbotron {
+  border-radius: 0; }
 
 .container h1 {
   font-family: 'Dancing Script', cursive; }
