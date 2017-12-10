@@ -10,7 +10,8 @@
   transition: background-color 2s ease-out;
 } 
 img { height:auto;max-width:100%;} 
-button.close { position: absolute; background:#fff; padding:8px;left:auto;right:0; display: none;}
+.buttonOptions { position: absolute; width: 100%; }
+button.close { position: relative; background:#fff; padding:8px;left:auto;right:0; display: none;}
 .card:hover button.close { display: block;}
 .jumbotron {
   border-radius: 0;

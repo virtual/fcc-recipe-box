@@ -12,8 +12,12 @@ img {
   height: auto;
   max-width: 100%; }
 
-button.close {
+.buttonOptions {
   position: absolute;
+  width: 100%; }
+
+button.close {
+  position: relative;
   background: #fff;
   padding: 8px;
   left: auto;

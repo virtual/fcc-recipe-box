@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
 import Ingredient from './Ingredient';
+import IoTrash from 'react-icons/lib/io/trash-a';
+import IoEdit from 'react-icons/lib/io/edit';
 var axios = require('axios');
 
 class DisplayRecipe extends Component {
   constructor() {
     super();
     this.state = {
-      id: null
+      id: null,
+      edit: false
     }
     this.removeRecipe = this.removeRecipe.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
   }
 
   removeRecipe(event) {
@@ -21,6 +25,10 @@ class DisplayRecipe extends Component {
         }
       }); 
     }
+  }
+
+  handleEditClick() {
+    console.log(this.state.id)
   }
 
   componentDidMount() {
@@ -38,9 +46,15 @@ class DisplayRecipe extends Component {
         let ignoreIds = 'a065a04cd4f815dca0f22476d225a051f9bd06c4302fe4019c25a062649475ca61ad5fb1d075a05081ed06c4302fe4019ad5a051ccbd06c4302fe4019bf';
         let deleteButton = '';
         if (ignoreIds.indexOf(this.props.id) === -1 ) {
-          deleteButton = <button title="Delete recipe" onClick={this.removeRecipe} value={this.props.id} type="button" className="close" aria-label="Delete">
-            <span aria-hidden="true">&times;</span>
-        </button>;
+          deleteButton =   <div className="buttonOptions">
+            <button title="Delete recipe" onClick={this.removeRecipe} value={this.props.id} type="button" className="close" aria-label="Delete">
+              <span aria-hidden="true"><IoTrash /></span>
+            </button>
+            <button title="Edit recipe" onClick={this.handleEditClick} value={this.props.id} type="button" className="close" aria-label="Edit">
+              <span aria-hidden="true"><IoEdit /></span>
+            </button> 
+            
+          </div>;
         }
 
         let ingredientHTML = '', ingredientHeader = '', ingredientsUL = '';
