@@ -19,6 +19,7 @@ export default class App extends Component {
     }
     this.getRecipes = this.getRecipes.bind(this);
     this.saveRecipe = this.saveRecipe.bind(this);
+    this.updateRecipe = this.updateRecipe.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleAddClick = this.handleAddClick.bind(this);
   }
@@ -54,6 +55,7 @@ export default class App extends Component {
   }
 
   saveRecipe(varRecipe) {
+  
     if (varRecipe.title && varRecipe.directions) {
       axios.post('/saveRecipe', varRecipe).then((newRecipe) => {  
         if (newRecipe.status === 200) {   
@@ -61,18 +63,28 @@ export default class App extends Component {
           console.log('save unsuccessful');
         }
       }); 
+    
       this.getRecipes();
       this.setState({
         modalClass: 'hide',
         message : ''
       });
+    
     } else {
       this.setState({
         message: 'Title and directions are required'
       });
-    }
+    } 
   }
-
+  updateRecipe(data, id) {
+    axios.post('/updateRecipe/'+id, data).then((res) => {  
+      if (res.status === 200) {   
+        this.getRecipes();
+      }  else {
+        console.log('save unsuccessful');
+      }
+    }); 
+  }
   componentDidMount() {
     if (this.state.recipelist === null) {
       this.getRecipes();
@@ -89,7 +101,7 @@ export default class App extends Component {
           <Router>
             <div>
               <Header/>
-              <Route exact path="/" render={()=> <Homepage message={this.state.message} handleAddClick={this.handleAddClick} handleCloseClick={this.handleCloseClick} saveRecipe={this.saveRecipe} modalClass={this.state.modalClass} recipelist={this.state.recipelist} getRecipes={this.getRecipes}  /> }/>
+              <Route exact path="/" render={()=> <Homepage message={this.state.message} handleAddClick={this.handleAddClick} handleCloseClick={this.handleCloseClick} saveRecipe={this.saveRecipe} modalClass={this.state.modalClass} recipelist={this.state.recipelist} getRecipes={this.getRecipes} updateRecipe={this.updateRecipe}  /> }/>
      
             
               <Footer/>

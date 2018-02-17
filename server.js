@@ -56,7 +56,7 @@ app.post('/recipes', function(req, res, next) {
 }
 });
 
-// saves recipe on update
+// saves recipe on Add
 app.post('/saveRecipe', function(req, res, next) { 
 
     // Add new recipe to db for slug/recipe 
@@ -78,6 +78,27 @@ app.post('/saveRecipe', function(req, res, next) {
         }
       }
     )
+});
+
+app.post('/updateRecipe/:id', function(req, res, next) { 
+  let recipe = {};   
+  recipe.picture = (req.body.picture !== '') ? xssFilters.inHTMLData(req.body.picture) : '';  
+  recipe.title = xssFilters.inHTMLData(req.body.title);
+  recipe.directions = xssFilters.inHTMLData(req.body.directions);
+  recipe.ingredients = req.body.ingredients.filter(function(n){  return (n.name) !== '' });
+  recipe.ingredients  = recipe.ingredients.map((e, i)=>{  
+    return {name: xssFilters.inHTMLData(e.name) }
+  });
+
+  Recipe.findByIdAndUpdate(req.params.id, recipe,
+    function(err, savedRecipe){
+      if(err) {
+        next(err);
+      } else {
+        res.json(savedRecipe);
+      }
+    }
+  )
 });
 
 app.post('/deleteRecipe', function(req, res, next) { 
