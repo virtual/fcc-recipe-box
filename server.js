@@ -50,6 +50,7 @@ app.post('/recipes', function(req, res, next) {
       if(err){
         next(err)
       } else {
+        console.log(recipes);
         res.json(recipes);
       }   
   });

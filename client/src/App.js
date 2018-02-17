@@ -69,6 +69,7 @@ export default class App extends Component {
         modalClass: 'hide',
         message : ''
       });
+      this.getRecipes();
     
     } else {
       this.setState({
