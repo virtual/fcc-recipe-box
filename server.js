@@ -80,6 +80,29 @@ app.post('/saveRecipe', function(req, res, next) {
     )
 });
 
+app.post('/updateRecipe/:id', function(req, res, next) { 
+
+  // Add new recipe to db for slug/recipe 
+  let recipe = new Recipe();   
+  recipe.picture = (req.body.picture !== '') ? xssFilters.inHTMLData(req.body.picture) : '';  
+  recipe.title = xssFilters.inHTMLData(req.body.title);
+  recipe.directions = xssFilters.inHTMLData(req.body.directions);
+  recipe.ingredients = req.body.ingredients.filter(function(n){  return (n.name) !== '' });
+  recipe.ingredients  = recipe.ingredients.map((e, i)=>{  
+    return {name: xssFilters.inHTMLData(e.name) }
+  });
+
+  recipe.save(
+    function(err, newrecipe){
+      if(err) {
+        next(err);
+      } else {
+        res.json(newrecipe);
+      }
+    }
+  )
+});
+
 app.post('/deleteRecipe', function(req, res, next) { 
   Recipe.findByIdAndRemove(req.body.id, (err, toDelete) => {  
     if (err) { console.log(err) }

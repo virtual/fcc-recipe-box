@@ -53,7 +53,16 @@ export default class App extends Component {
     });
   }
 
-  saveRecipe(varRecipe) {
+  saveRecipe(varRecipe, optionalId) {
+    if (optionalId > 0) { 
+      axios.post('/updateRecipe/'+optionalId, varRecipe).then((res) => {  
+        if (res.status === 200) {   
+        }  else {
+          console.log('save unsuccessful');
+        }
+      }); 
+    } 
+      else {   
     if (varRecipe.title && varRecipe.directions) {
       axios.post('/saveRecipe', varRecipe).then((newRecipe) => {  
         if (newRecipe.status === 200) {   
@@ -61,16 +70,19 @@ export default class App extends Component {
           console.log('save unsuccessful');
         }
       }); 
+    
       this.getRecipes();
       this.setState({
         modalClass: 'hide',
         message : ''
       });
+    
     } else {
       this.setState({
         message: 'Title and directions are required'
       });
     }
+  }
   }
 
   componentDidMount() {
