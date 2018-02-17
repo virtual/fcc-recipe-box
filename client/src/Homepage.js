@@ -10,7 +10,7 @@ export default class Homepage extends Component {
   }
   updateRecipe(data, id) {
     console.log('update', data, id)
-    //this.props.saveRecipe(data, id)
+    this.props.updateRecipe(data, id)
   }
   render() {
     const background = 'https://satinflame.com/img/stock/stock003.jpg';

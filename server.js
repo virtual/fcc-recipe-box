@@ -56,7 +56,7 @@ app.post('/recipes', function(req, res, next) {
 }
 });
 
-// saves recipe on update
+// saves recipe on Add
 app.post('/saveRecipe', function(req, res, next) { 
 
     // Add new recipe to db for slug/recipe 
@@ -83,7 +83,7 @@ app.post('/saveRecipe', function(req, res, next) {
 app.post('/updateRecipe/:id', function(req, res, next) { 
 
   // Add new recipe to db for slug/recipe 
-  let recipe = new Recipe();   
+  let recipe = {};   
   recipe.picture = (req.body.picture !== '') ? xssFilters.inHTMLData(req.body.picture) : '';  
   recipe.title = xssFilters.inHTMLData(req.body.title);
   recipe.directions = xssFilters.inHTMLData(req.body.directions);
@@ -92,12 +92,15 @@ app.post('/updateRecipe/:id', function(req, res, next) {
     return {name: xssFilters.inHTMLData(e.name) }
   });
 
-  recipe.save(
-    function(err, newrecipe){
+  console.log("going to update Recipe!!!", recipe)
+
+  Recipe.findByIdAndUpdate(req.params.id, recipe,
+    function(err, savedRecipe){
       if(err) {
         next(err);
       } else {
-        res.json(newrecipe);
+        console.log('saved', savedRecipe)
+        res.json(savedRecipe);
       }
     }
   )
