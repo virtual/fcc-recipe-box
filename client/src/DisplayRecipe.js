@@ -13,6 +13,8 @@ class DisplayRecipe extends Component {
     }
     this.removeRecipe = this.removeRecipe.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
+    this.handleSaveClick = this.handleSaveClick.bind(this);
+    this.handleCancelClick = this.handleCancelClick.bind(this);
   }
 
   removeRecipe(event) {
@@ -27,14 +29,28 @@ class DisplayRecipe extends Component {
     }
   }
 
+  handleSaveClick() {
+    // I think make methods in parent, call down as props and update on save
+    this.setState({
+      edit: false
+    })
+  }
+  handleCancelClick() {
+    this.setState({
+      edit: false
+    })
+  }
+
   handleEditClick() {
-    console.log(this.state.id)
+    this.setState({
+      edit: true
+    })
   }
 
   componentDidMount() {
     if (this.state.id === null) { 
     this.setState({
-      id: this.props.id
+      id: this.props.id 
     })
   }
   }
@@ -60,7 +76,7 @@ class DisplayRecipe extends Component {
         let ingredientHTML = '', ingredientHeader = '', ingredientsUL = '';
         ingredientsUL= <ul>
         {ingredients.map((content, index) => {
-        return <Ingredient key={index} name={content.name} />;
+        return <Ingredient edit={this.state.edit} key={index} name={content.name} />;
         })} </ul>;
 
         if (ingredients.length > 0) {
@@ -68,6 +84,26 @@ class DisplayRecipe extends Component {
           ingredientHTML = ingredientsUL;
         }
 
+        if (this.state.edit) {
+          return (
+            <div className='card'>
+              <div className="recipe-form">
+                <div className="card-block">
+                  <div className="card-content">
+                    {ingredientHeader}
+                    {ingredientHTML}
+                    <h3>Directions</h3>
+                    <textarea>{directions}</textarea><br/>
+                    <label for="imgtitle">Title: </label><input id="title" value={this.props.title} /><br/>
+                    <label for="imgsrc">Source: </label><input id="imgsrc" value={this.props.picture} /><br/>
+                    <button className="btn btn-success" onClick={this.handleSaveClick} >Save changes</button>
+                    <button className="btn btn- btn-danger " onClick={this.handleCancelClick}>Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        } else { 
         return (
             <div className='card'>
                 
@@ -88,6 +124,7 @@ class DisplayRecipe extends Component {
                 </div>
             </div>
         );
+      }
 
     }
 }
