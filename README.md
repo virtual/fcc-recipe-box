@@ -20,3 +20,7 @@ SERVER_MLAB_PASSWORD=YOURPASSWORD
 
 - `npm start` inside root
 - `npm start` inside client 
+
+### Production
+
+- `npm run build` inside client prior to pushing master
