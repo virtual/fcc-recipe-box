@@ -77,12 +77,13 @@ export default class App extends Component {
     } 
   }
   updateRecipe(data, id) {
-      axios.post('/updateRecipe/'+id, data).then((res) => {  
-        if (res.status === 200) {   
-        }  else {
-          console.log('save unsuccessful');
-        }
-      }); 
+    axios.post('/updateRecipe/'+id, data).then((res) => {  
+      if (res.status === 200) {   
+        this.getRecipes();
+      }  else {
+        console.log('save unsuccessful');
+      }
+    }); 
   }
   componentDidMount() {
     if (this.state.recipelist === null) {

@@ -81,8 +81,6 @@ app.post('/saveRecipe', function(req, res, next) {
 });
 
 app.post('/updateRecipe/:id', function(req, res, next) { 
-
-  // Add new recipe to db for slug/recipe 
   let recipe = {};   
   recipe.picture = (req.body.picture !== '') ? xssFilters.inHTMLData(req.body.picture) : '';  
   recipe.title = xssFilters.inHTMLData(req.body.title);
@@ -92,14 +90,11 @@ app.post('/updateRecipe/:id', function(req, res, next) {
     return {name: xssFilters.inHTMLData(e.name) }
   });
 
-  console.log("going to update Recipe!!!", recipe)
-
   Recipe.findByIdAndUpdate(req.params.id, recipe,
     function(err, savedRecipe){
       if(err) {
         next(err);
       } else {
-        console.log('saved', savedRecipe)
         res.json(savedRecipe);
       }
     }

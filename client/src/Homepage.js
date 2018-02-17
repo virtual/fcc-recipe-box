@@ -5,13 +5,12 @@ import Jumbotron from './Jumbotron';
 import Search from './Search';
 export default class Homepage extends Component {
   constructor() {
-    super();
+    super(); 
     this.updateRecipe = this.updateRecipe.bind(this);
   }
   updateRecipe(data, id) {
-    console.log('update', data, id)
     this.props.updateRecipe(data, id)
-  }
+  } 
   render() {
     const background = 'https://satinflame.com/img/stock/stock003.jpg';
     return (
