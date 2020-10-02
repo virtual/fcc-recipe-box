@@ -50,11 +50,11 @@ div#add-recipe-modal.show {
   display: block; }
 
 .btn-primary {
-  background: #51c6be;
+  background: #327873;
   border: 1px solid #4eb6ad; }
 
 .btn-primary:hover {
-  background: #42a098;
+  background: #336f6b;
   border: 1px solid #29a094; }
 
 button#addRecipe {
@@ -83,7 +83,7 @@ h2.card-title {
   font-family: 'Dancing Script', cursive; }
 
 .card-block h3 {
-  color: #5ed5cb;
+  color: #76dcd3;
   text-transform: uppercase;
   font-weight: 400; }
 
@@ -102,9 +102,10 @@ footer {
   font-size: .9rem; }
   footer a {
     color: #53c4bc;
+    text-decoration: underline;
     font-family: 'Dancing Script', cursive; }
     footer a:hover {
-      color: #5ed5cb; }
+      color: #76dcd3; }
 
 @media (max-width: 768px) {
   div#add-recipe-modal {
@@ -116,3 +117,10 @@ footer {
   padding: 5px 8px;
   background: rgba(240, 224, 2, 0.432);
   margin: 1rem 0; }
+
+.forkimg {
+  position: absolute; 
+  top: 0; 
+  right: 0; 
+  border: 0;
+}
