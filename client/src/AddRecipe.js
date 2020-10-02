@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import AddIngredient from './AddIngredient';
 
@@ -7,14 +7,14 @@ class AddRecipe extends Component {
     super(props);
     this.clickRecipeAdd = this.clickRecipeAdd.bind(this);
     this.getIngredient = this.getIngredient.bind(this);
-     this.state = ({
+    this.state = ({
       inputTitle: '',
       inputIngredients: [],
       inputPicture: '',
       inputDirections: ''
     });
 
-    this.ingKeeper=[] 
+    this.ingKeeper = []
   }
 
   getTitle(e) {
@@ -32,15 +32,15 @@ class AddRecipe extends Component {
       inputDirections: e.target.value
     });
   }
-getIngredient(e) {
-  var ing = [];
-  var inputs = document.getElementsByClassName( 'ingListItem' );
-  [].map.call(inputs, function( input, i ) {
+  getIngredient(e) {
+    var ing = [];
+    var inputs = document.getElementsByClassName('ingListItem');
+    [].map.call(inputs, function (input, i) {
       ing.push(input.value);
-        return input.value;
+      return input.value;
     });
-  
-  this.ingKeeper = ing; 
+
+    this.ingKeeper = ing;
     this.setState({
       inputIngredients: this.ingKeeper
     });
@@ -48,24 +48,24 @@ getIngredient(e) {
   }
 
 
-clickRecipeAdd () {
-// picture, directions
-  let ingArr = this.state.inputIngredients;
-  let ingInput = [];
-  ingInput = ingArr.map((e, i) => {
-    return {name: e};
-  });
-  let varRecipe = {
-    picture:  this.state.inputPicture, 
-    title: this.state.inputTitle, 
-    ingredients: ingInput, 
-    directions:  this.state.inputDirections
-  };
- 
-  this.props.saveRecipe(varRecipe); 
-}
- 
-  render() { 
+  clickRecipeAdd() {
+    // picture, directions
+    let ingArr = this.state.inputIngredients;
+    let ingInput = [];
+    ingInput = ingArr.map((e, i) => {
+      return { name: e };
+    });
+    let varRecipe = {
+      picture: this.state.inputPicture,
+      title: this.state.inputTitle,
+      ingredients: ingInput,
+      directions: this.state.inputDirections
+    };
+
+    this.props.saveRecipe(varRecipe);
+  }
+
+  render() {
     let messageHtml = '';
     if (this.props.message !== '') {
       messageHtml = <div className="warning-message">{this.props.message}</div>
@@ -93,49 +93,49 @@ clickRecipeAdd () {
                 <div className="form-group row">
                   <label htmlFor="recipename" className="col-sm-3 col-form-label">Title&nbsp;*</label>
                   <div className="col-sm-9">
-                    <input required 
+                    <input required
                       onChange={this.getTitle.bind(this)}
                       type="text"
                       className="form-control"
                       id="recipename"
-                      placeholder="Recipe Title"/>
+                      placeholder="Recipe Title" />
                   </div>
                 </div>
                 <div className="form-group row">
-                  <label htmlFor="recipeing01" className="col-sm-3 col-form-label">Ingredient</label>
+                  <label className="col-sm-3 col-form-label">Ingredients</label>
                   <div className="col-sm-9">
-                  <AddIngredient inputIngredients={this.state.inputIngredients} getIngredient={this.getIngredient}/>
+                    <AddIngredient inputIngredients={this.state.inputIngredients} getIngredient={this.getIngredient} />
                   </div>
                 </div>
-                 
-                 
+
+
                 <div className="form-group row">
                   <label htmlFor="picture" className="col-sm-3 col-form-label">Picture URL</label>
                   <div className="col-sm-9">
                     <input
-                     onChange={this.getPicture.bind(this)}
+                      onChange={this.getPicture.bind(this)}
                       type="text"
                       className="form-control"
                       id="picture"
-                      placeholder=".jpg, .png"/>
+                      placeholder=".jpg, .png" />
                   </div>
                 </div>
 
-                
+
                 <div className="form-group row">
                   <label htmlFor="directions" className="col-sm-3 col-form-label">Directions&nbsp;*</label>
                   <div className="col-sm-9">
                     <input
-                     onChange={this.getDirections.bind(this)}
-                     required 
+                      onChange={this.getDirections.bind(this)}
+                      required
                       type="text"
                       className="form-control"
                       id="directions"
-                      placeholder="How do you make it?"/>
+                      placeholder="How do you make it?" />
                   </div>
                 </div>
-                 
-                 
+
+
 
               </div>
               <div className="box-footer">
@@ -150,6 +150,6 @@ clickRecipeAdd () {
       </div>
     );
   }
- 
+
 }
 export default withRouter(AddRecipe);
