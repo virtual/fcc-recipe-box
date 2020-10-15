@@ -22,7 +22,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "mongodb-uri": "^0.9.7",
-    "mongoose": "^4.13.1",
+    "mongoose": "^5.7.5",
     "xss-filters": "^1.2.7"
   }
 }
