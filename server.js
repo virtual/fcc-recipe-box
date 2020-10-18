@@ -2,23 +2,20 @@ let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
-let uriUtil = require('mongodb-uri');
 let Recipe = require('./models/Recipe.js');
 require('dotenv').config();
 var xssFilters = require('xss-filters');
 
-let mongodbUri = "mongodb://"+process.env.SERVER_MLAB_USER+":"+process.env.SERVER_MLAB_PASSWORD+"@ds151955.mlab.com:51955/fcc-recipe";
-var mongooseUri = uriUtil.formatMongoose(mongodbUri);
-var options = {
-  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000} },
-  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000} }
-};
+let mongodbUri = "mongodb+srv://"+process.env.SERVER_MLAB_USER+":"+process.env.SERVER_MLAB_PASSWORD+"@fcc-recipe.iit3r.mongodb.net/fcc-recipe?retryWrites=true&w=majority&authSource=admin";
+mongoose.connect(mongodbUri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
-mongoose.connect(mongooseUri, options);
 var db = mongoose.connection; 
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-  console.log('database connected to Recipe database');
+db.once("open", function() {
+  console.log("Database connected to Recipe database");
 });
 
 /* passport has strategies which are functions that prove that a user trying to hit your server has permission */
