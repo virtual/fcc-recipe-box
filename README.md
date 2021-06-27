@@ -18,7 +18,7 @@ SERVER_MLAB_PASSWORD=YOURPASSWORD
 
 ### Running in local environment
 
-- `npm start` inside root
+- `npm start` inside root (updated to `npm run dev`)
 - `npm start` inside client 
 
 ### Production
