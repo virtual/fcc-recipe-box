@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AddRecipe from './AddRecipe';
 import DisplayRecipe from './DisplayRecipe';
 import Jumbotron from './Jumbotron';
-//import Search from './Search';
+import Search from './Search';
 export default class Homepage extends Component {
   constructor() {
     super(); 
@@ -16,6 +16,8 @@ export default class Homepage extends Component {
     return (
       <div>
           <Jumbotron handleAddClick={this.props.handleAddClick} background={background}/>
+          <Search
+            getRecipes={this.props.getRecipes} />
             <main>
               <div className='container'>
                 <div className="row">
@@ -23,7 +25,7 @@ export default class Homepage extends Component {
                     {this.props.recipelist.map((item, index) => { 
                       return <DisplayRecipe
                       getRecipes={this.props.getRecipes}
-                        key={index} 
+                        key={item._id} 
                         id={item._id}
                         elementNo={index}
                         title={item.title}
