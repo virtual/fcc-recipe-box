@@ -4,15 +4,15 @@
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",
-    "react": "^15.7.0",
-    "react-dom": "^15.7.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-icons": "^2.2.7",
     "react-router-dom": "^4.3.1",
-    "styled-components": "^1.4.4"
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
-    "node-sass": "^4.14.1",
-    "react-scripts": "0.9.5"
+    "node-sass": "^6.0.1",
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
     "build-css": "node-sass src/ -o src/",
@@ -22,5 +22,17 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
